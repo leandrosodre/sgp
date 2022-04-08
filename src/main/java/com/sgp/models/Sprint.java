@@ -36,23 +36,47 @@ public class Sprint implements Serializable {
         return sprintId;
     }
 
+    public void setSprintId(final long sprintId) {
+        this.sprintId = sprintId;
+    }
+
     public int getNumber() {
         return number;
+    }
+
+    public void setNumber(final int number) {
+        this.number = number;
     }
 
     public int getStatus() {
         return status;
     }
 
+    public void setStatus(final int status) {
+        this.status = status;
+    }
+
     public Date getStartDate() {
         return startDate;
+    }
+
+    public void setStartDate(final Date startDate) {
+        this.startDate = startDate;
     }
 
     public Date getEndDate() {
         return endDate;
     }
 
+    public void setEndDate(final Date endDate) {
+        this.endDate = endDate;
+    }
+
     public Team getTeam() {
         return team;
+    }
+
+    public void setTeam(final Team team) {
+        this.team = team;
     }
 }

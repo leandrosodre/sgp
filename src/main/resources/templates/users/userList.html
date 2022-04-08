@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/jquery.mask.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link href="css/masterPage.css" rel="stylesheet" type="text/css">
+    <title>SGC - Sistema de Gerenciamento de Projetos</title>
+    <style>
+		#td{
+			width: 50%;
+			margin-left: 120px;
+			margin-top:15px;
+			padding:1px;
+		}
+		#filtro{
+			text-align:center;
+			padding:1px;
+		}
+		#pad{
+			padding:2px;
+		}
+		#msg{
+			 width:80%;
+			 margin-left:10%;
+		}
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+<div th:replace="fragments/menuLateral :: menuLateral"></div>
+<div id="pagina">
+    <h1>Lista de Usuários</h1>
+    <div>
+        <a href="/createUser">
+            <button class="btn btn-primary" type="button">
+                <span aria-hidden="true" class="glyphicon glyphicon-plus-sign"></span> Cadastrar Usuário
+            </button>
+        </a>
+        <a href="/paginaInicial">
+            <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-home"></span></button>
+        </a>
+    </div>
+    <div>
+        <table class="table table-bordered" id="td">
+            <tr>
+                <td colspan="4" id="filtro"><b>Filtros</b></td>
+            </tr>
+            <tr>
+                <td id="pad" style="vertical-align: middle">
+                    <b>Usuário: </b>
+                </td>
+                <td id="pad">
+                    <input class="form-control" id="userName" type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" id="pad" style="text-align:right">
+                    <a onclick="busca()">
+                        <button class="btn btn-primary" type="button">
+                            <span aria-hidden="true" class="glyphicon glyphicon-search"></span> Buscar
+                        </button>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+            <td><b># Usuario</b></td>
+            <td><b>Nome</b></td>
+            <td><b>Login</b></td>
+            <td><b>Tipo</b></td>
+            <td><b>Data de Cadastro</b></td>
+            <td><b>Edit</b></td>
+            </thead>
+            <tr th:each="user : ${users}">
+                <td><span th:text="${user.userId}"></span></td>
+                <td><span th:text="${user.name}"></span></td>
+                <td><span th:text="${user.login}"></span></td>
+                <td><span th:text="${user.type}"></span></td>
+                <td><span th:text="${user.registerDate}"></span></td>
+            </tr>
+        </table>
+    </div>
+    <div id="msg" th:class="${'alert ' + alertClass}" th:if="${message}" th:text="${message}">
+    </div>
+</div>
+<script>
+	function busca(){
+		var cpf = $("#taskId").val();
+		var nome = $("#userId").val();
+
+		window.location.href='buscarPacientes?cpf='+ cpf +'&nome=' + nome;
+	}
+
+
+</script>
+</body>
+</html>
+

@@ -25,7 +25,15 @@ public class Team implements Serializable {
         return teamId;
     }
 
+    public void setTeamId(long teamId) {
+        this.teamId = teamId;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

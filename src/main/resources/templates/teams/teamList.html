@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/jquery.mask.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link href="css/masterPage.css" rel="stylesheet" type="text/css">
+    <title>SGC - Sistema de Gerenciamento de Projetos</title>
+    <style>
+		#td{
+			width: 50%;
+			margin-left: 120px;
+			margin-top:15px;
+			padding:1px;
+		}
+		#filtro{
+			text-align:center;
+			padding:1px;
+		}
+		#pad{
+			padding:2px;
+		}
+		#msg{
+			 width:80%;
+			 margin-left:10%;
+		}
+
+
+
+    </style>
+</head>
+
+<body>
+<div th:replace="fragments/menuLateral :: menuLateral"></div>
+<div id="pagina">
+    <h1>Lista de Times</h1>
+    <div>
+        <a href="/createTeam">
+            <button class="btn btn-primary" type="button">
+                <span aria-hidden="true" class="glyphicon glyphicon-plus-sign"></span> Cadastrar Time
+            </button>
+        </a>
+        <a href="/paginaInicial">
+            <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-home"></span></button>
+        </a>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+            <td><b># Time</b></td>
+            <td><b>Nome do Time</b></td>
+            <td><b>Editar</b></td>
+            </thead>
+            <tr th:each="team : ${teams}">
+                <td><span th:text="${team.teamId}"></span></td>
+                <td><span th:text="${team.name}"></span></td>
+            </tr>
+        </table>
+    </div>
+    <div id="msg" th:class="${'alert ' + alertClass}" th:if="${message}" th:text="${message}">
+    </div>
+</div>
+</body>
+</html>
+

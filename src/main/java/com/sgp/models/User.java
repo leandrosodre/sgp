@@ -40,31 +40,63 @@ public class User implements Serializable {
         return userId;
     }
 
+    public void setUserId(final long userId) {
+        this.userId = userId;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
     }
 
     public String getLogin() {
         return login;
     }
 
+    public void setLogin(final String login) {
+        this.login = login;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(final String password) {
+        this.password = password;
     }
 
     public Date getBornDate() {
         return bornDate;
     }
 
+    public void setBornDate(final Date bornDate) {
+        this.bornDate = bornDate;
+    }
+
     public Date getRegisterDate() {
         return registerDate;
+    }
+
+    public void setRegisterDate(final Date registerDate) {
+        this.registerDate = registerDate;
     }
 
     public int getType() {
         return type;
     }
 
+    public void setType(final int type) {
+        this.type = type;
+    }
+
     public Team getTeam() {
         return team;
+    }
+
+    public void setTeam(final Team team) {
+        this.team = team;
     }
 }
