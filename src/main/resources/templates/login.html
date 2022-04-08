@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/jquery.mask.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <title>SGP - Sistema de Gerenciamento de Projetos</title>
+    <style>
+		.form-control{
+			margin:10px;
+		}
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 style="text-align:center">SGP</h1>
+
+    <form method="post" name="f" th:action="@{/login}">
+        <table align="center">
+            <tr height=20px>
+            </tr>
+            <tr>
+                <td><label for="username">Usuário: </label></td>
+                <td><input class="form-control" id="username" name="username" type="text"/></td>
+            </tr>
+            <tr>
+                <td><label for="password">Senha: </label></td>
+                <td><input class="form-control" id="password" name="password" type="password"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="text-align:center">
+                    <div class="form-actions">
+                        <button class="btn btn-primary" type="submit">
+                            Entrar<span class="glyphicons glyphicons-log-in"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div class="alert alert-success" th:if="${logout}">
+        Logout realizado com sucesso.
+    </div>
+    <div class="alert alert-danger" th:if="${erroLogin}">
+        Usuário ou senha inválidos.
+    </div>
+    <div class="alert alert-danger" th:if="${usuarioInativo}">
+        Usuário inativo.
+    </div>
+</div>
+</body>
+</html>

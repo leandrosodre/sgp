@@ -1,0 +1,39 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/jquery.mask.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <title>SGC - Sistema de Gerenciamento de Projetos</title>
+    <link href="css/masterPage.css" rel="stylesheet">
+</head>
+
+
+<div th:fragment="menuLateral">
+    <nav id="menu">
+        <ul>
+            <li id="topo">
+                <span id="titulo">SGP</span>
+            </li>
+            <li>
+                <div>
+                    <a href="/mensagem">
+                        Mensagens
+                        <sup>
+                            <span name="quantidadeNaolidas" type="text"></span>
+                        </sup>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <a href="/logout">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>
+</html>
