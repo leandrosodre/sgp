@@ -1,12 +1,11 @@
 package com.sgp.controllers;
 
+import com.sgp.models.Sprint;
 import com.sgp.models.Team;
-import com.sgp.models.User;
+import com.sgp.repositories.SprintRepository;
 import com.sgp.repositories.TeamRepository;
-import com.sgp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,38 +18,38 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
-public class UserController {
+public class SprintController {
 
-    final UserRepository userRepository;
+    final SprintRepository sprintRepository;
     final TeamRepository teamRepository;
 
     @Autowired
-    public UserController(final UserRepository userRepository, final TeamRepository teamRepository) {
-        this.userRepository = userRepository;
+    public SprintController(final SprintRepository sprintRepository, final TeamRepository teamRepository) {
+        this.sprintRepository = sprintRepository;
         this.teamRepository = teamRepository;
     }
 
-    @RequestMapping("/users")
+    @RequestMapping("/sprints")
     public ModelAndView tasks() {
-        final ModelAndView mv = new ModelAndView("users/userList");
-        final Iterable<User> users = userRepository.findAll();
-        mv.addObject("users", users);
+        final ModelAndView mv = new ModelAndView("sprints/sprintList");
+        final Iterable<Sprint> sprints = sprintRepository.findAll();
+        mv.addObject("sprints", sprints);
         return mv;
     }
 
-    @GetMapping(value = "/createUser")
+    @GetMapping(value = "/createSprint")
     public ModelAndView form() {
-        final ModelAndView mv = new ModelAndView("users/createUser");
+        final ModelAndView mv = new ModelAndView("sprints/createSprint");
         final Iterable<Team> teams = teamRepository.findAll();
         mv.addObject("teams", teams);
         return mv;
     }
 
-    @PostMapping(value = "/createUser")
-    public String createUser(final User user) {
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        userRepository.save(user);
-        return "redirect:/users";
+    @PostMapping(value = "/createSprint")
+    public String createSprint(final Sprint sprint) {
+        sprint.setOpen(true);
+        sprintRepository.save(sprint);
+        return "redirect:/sprints";
     }
 
     @InitBinder

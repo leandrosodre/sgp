@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/jquery.mask.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link href="css/masterPage.css" rel="stylesheet" type="text/css">
+    <title>SGC - Sistema de Gerenciamento de Projetos</title>
+    <style>
+		#td{
+			width: 50%;
+			margin-left: 120px;
+			margin-top:15px;
+			padding:1px;
+		}
+		#filtro{
+			text-align:center;
+			padding:1px;
+		}
+		#pad{
+			padding:2px;
+		}
+		#msg{
+			 width:80%;
+			 margin-left:10%;
+		}
+    </style>
+</head>
+
+<body>
+<div th:replace="fragments/leftTab :: leftTab"></div>
+<div id="pagina">
+    <h1>Lista de Sprints</h1>
+    <div>
+        <a href="/createSprint">
+            <button class="btn btn-primary" type="button">
+                <span aria-hidden="true" class="glyphicon glyphicon-plus-sign"></span> Cadastrar Sprint
+            </button>
+        </a>
+        <a href="/">
+            <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-home"></span></button>
+        </a>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+            <td><b># Sprint</b></td>
+            <td><b>Time</b></td>
+            <td><b>Inicio</b></td>
+            <td><b>Fim</b></td>
+            <td><b>Status</b></td>
+            <td><b>Editar</b></td>
+            </thead>
+            <tr th:each="sprint : ${sprints}">
+                <td><span th:text="${sprint.number}"></span></td>
+                <td><span th:text="${sprint.team.name}"></span></td>
+                <td><span class="date" th:text="${sprint.startDate}"></span></td>
+                <td><span class="date" th:text="${sprint.endDate}"></span></td>
+                <td>
+                    <span th:if="${sprint.open} == true" th:text="Aberto"></span>
+                    <span th:if="${sprint.open} == false" th:text="Fechado"></span>
+                </span></td>
+            </tr>
+        </table>
+    </div>
+    <div id="msg" th:class="${'alert ' + alertClass}" th:if="${message}" th:text="${message}">
+    </div>
+</div>
+<script>
+	$(document).ready(function(){
+		$(".date").each(function(){
+			let date = $(this).text();
+			let year  = date.substring(0,4);
+			let month = date.substring(5,7);
+			let day   = date.substring(8,10);
+			$(this).text(day + "/" + month + "/" + year);
+		});
+	});
+</script>
+</body>
+</html>
+

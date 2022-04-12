@@ -16,6 +16,9 @@
 		}
 
 
+
+
+
     </style>
     <link href="css/masterPage.css" rel="stylesheet" type="text/css">
     <title>SGP - Sistema de Gerenciamento de Projetos</title>
@@ -27,13 +30,6 @@
     <h1>Criar nova Task</h1>
     <form class="container" method="post">
         <table>
-            <tr>
-                <td colspan="2">
-                    <div class="alert alert-danger" th:if="${erro}">
-                        <div th:text="${mensagem}"></div>
-                    </div>
-                </td>
-            </tr>
             <tr>
                 <td>Número da Task:</td>
                 <td><input class="form-control" id="number" name="taskNumber" type="text" value=""/></td>
@@ -72,8 +68,8 @@
                 <td>Sprint:</td>
                 <td><select class="form-control" name="team.teamId">
                     <option th:text="SELECIONE" value="0"></option>
-                    <option th:each="sprint : ${sprint}"
-                            th:text="Sprint ${sprint.number} - ${sprint.team.name} "
+                    <option th:each="sprint : ${sprints}"
+                            th:text="'Sprint ' + ${sprint.number} + ' - ' + ${sprint.team.name}"
                             th:value="${sprint.sprintId}"/>
                 </select></td>
             </tr>

@@ -13,6 +13,7 @@
 			margin:10px;
 		}
 
+
     </style>
 </head>
 <body>
@@ -46,11 +47,8 @@
     <div class="alert alert-success" th:if="${logout}">
         Logout realizado com sucesso.
     </div>
-    <div class="alert alert-danger" th:if="${erroLogin}">
+    <div class="alert alert-danger" th:if="${invalidUser}">
         Usuário ou senha inválidos.
-    </div>
-    <div class="alert alert-danger" th:if="${usuarioInativo}">
-        Usuário inativo.
     </div>
 </div>
 </body>

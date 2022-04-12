@@ -15,9 +15,6 @@
 			padding:10px;
 		}
 
-
-
-
     </style>
     <link href="css/masterPage.css" rel="stylesheet" type="text/css">
     <title>SGP - Sistema de Gerenciamento de Projetos</title>
@@ -26,12 +23,29 @@
 <body>
 <div th:replace="fragments/leftTab :: leftTab"></div>
 <div id="pagina">
-    <h1>Criar novo time</h1>
+    <h1>Criar nova Sprint</h1>
     <form class="container" method="post">
         <table>
             <tr>
-                <td>Nome do Time:</td>
-                <td><input class="form-control" id="name" name="name" type="text" value=""/></td>
+                <td>Número da Sprint:</td>
+                <td><input class="form-control" id="number" name="number" type="text" value=""/></td>
+            </tr>
+            <tr>
+                <td>Time:</td>
+                <td><select class="form-control" name="team.teamId">
+                    <option th:text="SELECIONE" value="0"></option>
+                    <option th:each="team : ${teams}"
+                            th:text="${team.name}"
+                            th:value="${team.teamId}"/>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Data de início:</td>
+                <td><input class="form-control" name="startDate" type="date" value=""/></td>
+            </tr>
+            <tr>
+                <td>Data de fim:</td>
+                <td><input class="form-control" name="endDate" type="date" value=""/></td>
             </tr>
             <tr>
                 <td>

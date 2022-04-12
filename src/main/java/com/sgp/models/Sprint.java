@@ -12,7 +12,7 @@ public class Sprint implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long sprintId;
     private int number;
-    private int status;
+    private boolean open;
     private Date startDate;
     private Date endDate;
 
@@ -23,10 +23,10 @@ public class Sprint implements Serializable {
         super();
     }
 
-    public Sprint(final long sprintId, final int number, final int status, final Date startDate, final Date endDate, final Team team) {
+    public Sprint(final long sprintId, final int number, final boolean open, final Date startDate, final Date endDate, final Team team) {
         this.sprintId = sprintId;
         this.number = number;
-        this.status = status;
+        this.open = open;
         this.startDate = startDate;
         this.endDate = endDate;
         this.team = team;
@@ -48,12 +48,12 @@ public class Sprint implements Serializable {
         this.number = number;
     }
 
-    public int getStatus() {
-        return status;
+    public boolean getOpen() {
+        return open;
     }
 
-    public void setStatus(final int status) {
-        this.status = status;
+    public void setOpen(final boolean open) {
+        this.open = open;
     }
 
     public Date getStartDate() {

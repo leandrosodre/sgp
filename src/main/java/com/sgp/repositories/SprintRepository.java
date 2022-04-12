@@ -1,11 +1,12 @@
 package com.sgp.repositories;
 
 import com.sgp.models.Sprint;
-import com.sgp.models.Task;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface SprintRepository extends CrudRepository<Sprint, String> {
-    Task findBySprintId(long sprintId);
 
-
+    @Query("from Sprint where open=1")
+    Iterable<Sprint> findAllOpenSprints();
+    
 }

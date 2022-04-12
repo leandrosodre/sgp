@@ -4,7 +4,6 @@ import com.sgp.models.Team;
 import com.sgp.repositories.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,14 +24,13 @@ public class TeamController {
     }
 
     @GetMapping(value = "/createTeam")
-    public String form(final Model model) {
-
+    public String form() {
         return "teams/createTeam";
     }
 
     @PostMapping(value = "/createTeam")
     public String createTeam(final Team team) {
         teamRepository.save(team);
-        return "teams/createTeam";
+        return "redirect:/teams";
     }
 }
