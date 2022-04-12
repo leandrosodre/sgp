@@ -30,11 +30,13 @@
 
 
 
+
+
     </style>
 </head>
 
 <body>
-<div th:replace="fragments/menuLateral :: menuLateral"></div>
+<div th:replace="fragments/leftTab :: leftTab"></div>
 <div id="pagina">
     <h1>Lista de Times</h1>
     <div>
@@ -43,7 +45,7 @@
                 <span aria-hidden="true" class="glyphicon glyphicon-plus-sign"></span> Cadastrar Time
             </button>
         </a>
-        <a href="/paginaInicial">
+        <a href="/">
             <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-home"></span></button>
         </a>
     </div>

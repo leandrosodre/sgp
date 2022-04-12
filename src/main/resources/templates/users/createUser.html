@@ -16,18 +16,13 @@
 		}
 
 
-
-
-
-
-
     </style>
     <link href="css/masterPage.css" rel="stylesheet" type="text/css">
     <title>SGP - Sistema de Gerenciamento de Projetos</title>
 </head>
 
 <body>
-<div th:replace="fragments/menuLateral :: menuLateral"></div>
+<div th:replace="fragments/leftTab :: leftTab"></div>
 <div id="pagina">
     <h1>Criar novo usuário</h1>
     <form class="container" method="post">
@@ -36,17 +31,18 @@
                 <td colspan="2">
                     <div class="alert alert-danger" th:if="${erro}">
                         <div th:text="${mensagem}"></div>
+                        userName
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>Nome Usuário:</td>
-                <td><input class="form-control" id="name" name="userName" type="text" value=""/></td>
+                <td><input class="form-control" id="name" name="name" type="text" value=""/></td>
             </tr>
 
             <tr>
                 <td>Data de Nascimento:</td>
-                <td><input class="form-control" name="bornDate" type="date"/></td>
+                <td><input class="form-control" name="bornDate" type="date" value=""/></td>
             </tr>
 
             <tr>
@@ -77,7 +73,7 @@
 
             <tr>
                 <td>Senha:</td>
-                <td><input class="form-control" maxlength="15" name="senha" type="password" value=""/></td>
+                <td><input class="form-control" maxlength="15" name="password" type="password" value=""/></td>
             </tr>
 
             <tr>

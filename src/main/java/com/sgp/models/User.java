@@ -15,7 +15,7 @@ public class User implements Serializable {
     private String login;
     private String password;
     private Date bornDate;
-    private Date registerDate;
+    private Date registerDate = new Date();
     private int type;
 
     @ManyToOne
