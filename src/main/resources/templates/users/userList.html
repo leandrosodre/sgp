@@ -50,7 +50,7 @@
                 <td><span th:text="${user.userId}"></span></td>
                 <td><span th:text="${user.name}"></span></td>
                 <td><span th:text="${user.login}"></span></td>
-                <td><span th:text="${user.type}"></span></td>
+                <td><span class="type" th:text="${user.type}"></span></td>
                 <td><span th:text="${user.registerDate}"></span></td>
             </tr>
         </table>
@@ -58,5 +58,26 @@
 </div>
 </div>
 </body>
+<script>
+$(document).ready(function(){
+		$(".type").each(function(){
+			let type = $(this).text();
+			switch(type){
+			    case "0":
+			        $(this).text("Administrador");
+			        break;
+			    case "1":
+			        $(this).text("Project Manager");
+			        break;
+			    case "2":
+			        $(this).text("Scrum Master");
+			        break;
+			    case "3":
+			        $(this).text("Developer");
+			        break;
+			}
+		});
+	});
+</script>
 </html>
 

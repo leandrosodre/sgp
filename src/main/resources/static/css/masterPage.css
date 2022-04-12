@@ -22,21 +22,22 @@
     width:100%;
 }
 
-#topo{
+#top{
 	background-color:#EDEDED;
 	color:#337ab7;
 	width: 100%;
 	height: 70px;
 	padding:10px;
 }
-#titulo{
+#title{
 	font-size:36px;
-	margin-left:2%;
+	margin-left:25%;
 	
 }
 #menu{
 	position:fixed;
 	height:100%;
+	width:10%;
 }
 
 #page{
