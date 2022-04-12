@@ -16,23 +16,15 @@
 			margin-top:15px;
 			padding:1px;
 		}
-		#filtro{
-			text-align:center;
-			padding:1px;
-		}
 		#pad{
 			padding:2px;
-		}
-		#msg{
-			 width:80%;
-			 margin-left:10%;
 		}
     </style>
 </head>
 
 <body>
 <div th:replace="fragments/leftTab :: leftTab"></div>
-<div id="pagina">
+<div id="page">
     <h1>Lista de Sprints</h1>
     <div>
         <a href="/createSprint">
@@ -66,7 +58,6 @@
             </tr>
         </table>
     </div>
-    <div id="msg" th:class="${'alert ' + alertClass}" th:if="${message}" th:text="${message}">
     </div>
 </div>
 <script>

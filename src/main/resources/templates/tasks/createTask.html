@@ -19,6 +19,9 @@
 
 
 
+
+
+
     </style>
     <link href="css/masterPage.css" rel="stylesheet" type="text/css">
     <title>SGP - Sistema de Gerenciamento de Projetos</title>
@@ -32,7 +35,7 @@
         <table>
             <tr>
                 <td>Número da Task:</td>
-                <td><input class="form-control" id="number" name="taskNumber" type="text" value=""/></td>
+                <td><input class="form-control" id="number" name="number" type="text" value=""/></td>
             </tr>
             <tr>
                 <td>User:</td>
@@ -66,7 +69,7 @@
             </tr>
             <tr>
                 <td>Sprint:</td>
-                <td><select class="form-control" name="team.teamId">
+                <td><select class="form-control" name="sprint.sprintId">
                     <option th:text="SELECIONE" value="0"></option>
                     <option th:each="sprint : ${sprints}"
                             th:text="'Sprint ' + ${sprint.number} + ' - ' + ${sprint.team.name}"
