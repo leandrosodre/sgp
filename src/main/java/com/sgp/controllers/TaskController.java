@@ -11,9 +11,12 @@ import com.sgp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.persistence.EntityNotFoundException;
 
 @Controller
 public class TaskController {
@@ -49,6 +52,24 @@ public class TaskController {
         mv.addObject("users", users);
         mv.addObject("teams", teams);
         mv.addObject("sprints", sprints);
+        return mv;
+    }
+
+    @GetMapping("/task/{taskId}")
+    public ModelAndView editTask(@PathVariable final long taskId) {
+        final ModelAndView mv = new ModelAndView("tasks/updateTask");
+
+        final Task task = taskRepository.findByTaskId(taskId).orElseThrow(EntityNotFoundException::new);
+        mv.addObject("task", task);
+
+        final Iterable<Team> teams = teamRepository.findAll();
+        final Iterable<Sprint> sprints = sprintRepository.findAll();
+        final Iterable<User> users = userRepository.findAll();
+
+        mv.addObject("teams", teams);
+        mv.addObject("sprints", sprints);
+        mv.addObject("users", users);
+
         return mv;
     }
 

@@ -3,8 +3,10 @@ package com.sgp.repositories;
 import com.sgp.models.Task;
 import org.springframework.data.repository.CrudRepository;
 
-public interface TaskRepository extends CrudRepository<Task, String> {
-    Task findByTaskId(long taskId);
+import java.util.Optional;
 
+public interface TaskRepository extends CrudRepository<Task, String> {
+
+    Optional<Task> findByTaskId(final Long id);
 
 }

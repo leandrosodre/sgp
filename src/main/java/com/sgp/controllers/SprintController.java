@@ -8,12 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.EntityNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -37,7 +35,7 @@ public class SprintController {
         return mv;
     }
 
-    @GetMapping(value = "/createSprint")
+    @GetMapping("/createSprint")
     public ModelAndView form() {
         final ModelAndView mv = new ModelAndView("sprints/createSprint");
         final Iterable<Team> teams = teamRepository.findAll();
@@ -45,11 +43,22 @@ public class SprintController {
         return mv;
     }
 
-    @PostMapping(value = "/createSprint")
+    @PostMapping("/createSprint")
     public String createSprint(final Sprint sprint) {
         sprint.setOpen(true);
         sprintRepository.save(sprint);
         return "redirect:/sprints";
+    }
+
+    @GetMapping("/sprint/{sprintId}")
+    public ModelAndView editSprint(@PathVariable final long sprintId) {
+        final ModelAndView mv = new ModelAndView("sprints/updateSprint");
+        final Sprint sprint = sprintRepository.findBySprintId(sprintId).orElseThrow(EntityNotFoundException::new);
+        mv.addObject("sprint", sprint);
+
+        final Iterable<Team> teams = teamRepository.findAll();
+        mv.addObject("teams", teams);
+        return mv;
     }
 
     @InitBinder

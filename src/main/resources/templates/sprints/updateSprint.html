@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/jquery.mask.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/jquery.mask.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <style>
 		td{
 			padding:4px;
@@ -14,37 +14,40 @@
 		h1{
 			padding:10px;
 		}
+
     </style>
-    <link href="css/masterPage.css" rel="stylesheet" type="text/css">
+    <link href="../css/masterPage.css" rel="stylesheet" type="text/css">
     <title>SGP - Sistema de Gerenciamento de Projetos</title>
 </head>
 
 <body>
 <div th:replace="fragments/leftTab :: leftTab"></div>
 <div id="page">
-    <h1>Criar nova Sprint</h1>
+    <h1>Atualizar Sprint</h1>
     <form class="container" method="post">
         <table>
             <tr>
                 <td>Número da Sprint:</td>
-                <td><input class="form-control" id="number" name="number" type="text" value=""/></td>
+                <td><input class="form-control" id="number" name="number" th:value="${sprint.number}" type="text"
+                           value=""/></td>
             </tr>
             <tr>
                 <td>Time:</td>
                 <td><select class="form-control" name="team.teamId">
                     <option th:text="SELECIONE" value="0"></option>
                     <option th:each="team : ${teams}"
+                            th:selected="(${team.teamId} == *{sprint.team.teamId})"
                             th:text="${team.name}"
                             th:value="${team.teamId}"/>
                 </select></td>
             </tr>
             <tr>
                 <td>Data de início:</td>
-                <td><input class="form-control" name="startDate" type="date" value=""/></td>
+                <td><input class="form-control" name="startDate" th:field="${sprint.startDate}" type="date"/></td>
             </tr>
             <tr>
                 <td>Data de fim:</td>
-                <td><input class="form-control" name="endDate" type="date" value=""/></td>
+                <td><input class="form-control" name="endDate" th:field="${sprint.endDate}" type="date"/></td>
             </tr>
             <tr>
                 <td>

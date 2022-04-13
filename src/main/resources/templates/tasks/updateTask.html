@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/jquery.mask.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/jquery.mask.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <style>
 		td{
 			padding:4px;
@@ -19,25 +19,26 @@
             width: 400px;
         }
     </style>
-    <link href="css/masterPage.css" rel="stylesheet" type="text/css">
+    <link href="../css/masterPage.css" rel="stylesheet" type="text/css">
     <title>SGP - Sistema de Gerenciamento de Projetos</title>
 </head>
 
 <body>
 <div th:replace="fragments/leftTab :: leftTab"></div>
 <div id="page">
-    <h1>Criar nova Task</h1>
+    <h1>Atualizar Task</h1>
     <form class="container" method="post">
         <table style="float: left;">
             <tr>
                 <td>Número da Task:</td>
-                <td><input class="form-control" id="number" name="number" type="text" value=""/></td>
+                <td><input class="form-control" id="number" name="number" th:value="${task.number}" type="text"/></td>
             </tr>
             <tr>
                 <td>User:</td>
                 <td><select class="form-control" name="user.userId">
                     <option th:text="SELECIONE" value="0"></option>
                     <option th:each="user : ${users}"
+                            th:selected="(${user.userId} == *{task.user.userId})"
                             th:text="${user.name}"
                             th:value="${user.userId}"/>
                 </select></td>
@@ -59,6 +60,7 @@
                 <td><select class="form-control" name="team.teamId">
                     <option th:text="SELECIONE" value="0"></option>
                     <option th:each="team : ${teams}"
+                            th:selected="(${team.teamId} == *{task.team.teamId})"
                             th:text="${team.name}"
                             th:value="${team.teamId}"/>
                 </select></td>
@@ -68,6 +70,7 @@
                 <td><select class="form-control" name="sprint.sprintId">
                     <option th:text="SELECIONE" value="0"></option>
                     <option th:each="sprint : ${sprints}"
+                            th:selected="(${sprint.sprintId} == *{task.sprint.sprintId})"
                             th:text="'Sprint ' + ${sprint.number} + ' - ' + ${sprint.team.name}"
                             th:value="${sprint.sprintId}"/>
                 </select></td>
@@ -78,7 +81,7 @@
             <tr><td>Descrição da task:</td></tr>
             <tr>
                 <td><textarea class="form-control" id="description" name="description"
-                              value=""/></textarea></td>
+                                  th:field="${task.description}"/></textarea></td>
             </tr>
             <tr>
                 <td align="right">
