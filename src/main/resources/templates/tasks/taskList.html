@@ -96,10 +96,12 @@
 		});
 		$(".date").each(function(){
 			let date = $(this).text();
-			let year  = date.substring(0,4);
-			let month = date.substring(5,7);
-			let day   = date.substring(8,10);
-			$(this).text(day + "/" + month + "/" + year);
+			if (date != '') {
+                let year  = date.substring(0,4);
+                let month = date.substring(5,7);
+                let day   = date.substring(8,10);
+                $(this).text(day + "/" + month + "/" + year);
+            }
 		});
 	});
 </script>
