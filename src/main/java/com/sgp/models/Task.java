@@ -1,7 +1,10 @@
 package com.sgp.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "task")
@@ -10,10 +13,20 @@ public class Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long taskId;
+    @NotNull
     private long number;
+
+    @NotNull
+    @Size(min = 10, max = 200)
     private String description;
+
+    @NotNull
     private int priority;
-    private int status;
+    private float loggedTime;
+
+    @NotNull
+    private Date expectedDate;
+    private Date actualDate;
 
     @ManyToOne
     private User user;
@@ -26,12 +39,14 @@ public class Task implements Serializable {
         super();
     }
 
-    public Task(final long taskId, final long number, final String description, final int priority, final int status, final User user, final Team team, final Sprint sprint) {
+    public Task(final long taskId, final long number, final String description, final int priority, final float loggedTime, final Date expectedDate, final Date actualDate, final User user, final Team team, final Sprint sprint) {
         this.taskId = taskId;
         this.number = number;
         this.description = description;
         this.priority = priority;
-        this.status = status;
+        this.loggedTime = loggedTime;
+        this.expectedDate = expectedDate;
+        this.actualDate = actualDate;
         this.user = user;
         this.team = team;
         this.sprint = sprint;
@@ -41,7 +56,7 @@ public class Task implements Serializable {
         return taskId;
     }
 
-    public void setTaskId(long taskId) {
+    public void setTaskId(final long taskId) {
         this.taskId = taskId;
     }
 
@@ -49,7 +64,7 @@ public class Task implements Serializable {
         return number;
     }
 
-    public void setNumber(long number) {
+    public void setNumber(final long number) {
         this.number = number;
     }
 
@@ -57,7 +72,7 @@ public class Task implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -65,23 +80,39 @@ public class Task implements Serializable {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(final int priority) {
         this.priority = priority;
     }
 
-    public int getStatus() {
-        return status;
+    public float getLoggedTime() {
+        return loggedTime;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setLoggedTime(final float loggedTime) {
+        this.loggedTime = loggedTime;
+    }
+
+    public Date getExpectedDate() {
+        return expectedDate;
+    }
+
+    public void setExpectedDate(final Date expectedDate) {
+        this.expectedDate = expectedDate;
+    }
+
+    public Date getActualDate() {
+        return actualDate;
+    }
+
+    public void setActualDate(final Date actualDate) {
+        this.actualDate = actualDate;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 
@@ -89,7 +120,7 @@ public class Task implements Serializable {
         return team;
     }
 
-    public void setTeam(Team team) {
+    public void setTeam(final Team team) {
         this.team = team;
     }
 
@@ -97,7 +128,7 @@ public class Task implements Serializable {
         return sprint;
     }
 
-    public void setSprint(Sprint sprint) {
+    public void setSprint(final Sprint sprint) {
         this.sprint = sprint;
     }
 }

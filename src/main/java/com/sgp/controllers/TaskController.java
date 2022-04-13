@@ -9,14 +9,15 @@ import com.sgp.repositories.TaskRepository;
 import com.sgp.repositories.TeamRepository;
 import com.sgp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class TaskController {
@@ -73,6 +74,14 @@ public class TaskController {
         return mv;
     }
 
+    @GetMapping("/task/finishTask/{taskId}")
+    public String finishTask(@PathVariable final long taskId) {
+        final Task task = taskRepository.findByTaskId(taskId).orElseThrow(EntityNotFoundException::new);
+        task.setActualDate(new Date());
+        taskRepository.save(task);
+        return "redirect:/tasks";
+    }
+
     @PostMapping("/task/{taskId}")
     public String updateTask(final Task task) {
         taskRepository.save(task);
@@ -85,5 +94,8 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
-
+    @InitBinder
+    public void initBinder(final WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+    }
 }

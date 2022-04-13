@@ -1,6 +1,7 @@
 package com.sgp.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,9 +12,15 @@ public class Sprint implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long sprintId;
+
+    @NotNull
     private int number;
     private boolean open;
+
+    @NotNull
     private Date startDate;
+
+    @NotNull
     private Date endDate;
 
     @ManyToOne

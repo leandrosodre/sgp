@@ -1,6 +1,8 @@
 package com.sgp.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,11 +13,17 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
+
+    @NotNull
     private String name;
+
+    @NotNull
     private String login;
+
+    @NotNull
+    @Size(min = 3, max = 20)
     private String password;
     private Date bornDate;
-    private Date registerDate = new Date();
     private int type;
 
     @ManyToOne
@@ -25,13 +33,12 @@ public class User implements Serializable {
         super();
     }
 
-    public User(final long userId, final String name, final String login, final String password, final Date bornDate, final Date registerDate, final int type, final Team team) {
+    public User(final long userId, final String name, final String login, final String password, final Date bornDate, final int type, final Team team) {
         this.userId = userId;
         this.name = name;
         this.login = login;
         this.password = password;
         this.bornDate = bornDate;
-        this.registerDate = registerDate;
         this.type = type;
         this.team = team;
     }
@@ -74,14 +81,6 @@ public class User implements Serializable {
 
     public void setBornDate(final Date bornDate) {
         this.bornDate = bornDate;
-    }
-
-    public Date getRegisterDate() {
-        return registerDate;
-    }
-
-    public void setRegisterDate(final Date registerDate) {
-        this.registerDate = registerDate;
     }
 
     public int getType() {

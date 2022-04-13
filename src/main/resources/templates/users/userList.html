@@ -43,7 +43,6 @@
             <td><b>Nome</b></td>
             <td><b>Login</b></td>
             <td><b>Tipo</b></td>
-            <td><b>Data de Cadastro</b></td>
             <td><b>Editar</b></td>
             </thead>
             <tr th:each="user : ${users}">
@@ -51,7 +50,6 @@
                 <td><span th:text="${user.name}"></span></td>
                 <td><span th:text="${user.login}"></span></td>
                 <td><span class="type" th:text="${user.type}"></span></td>
-                <td><span class="date" th:text="${user.registerDate}"></span></td>
                 <td>
                     <a th:href="${(#mvc.url('UC#editUser').arg(0, user.userId)).build()}" data-toggle="tooltip" data-placement="bottom" title="Editar Usuario">
                         <button type="button" class="btn btn-primary">
@@ -66,7 +64,7 @@
 </div>
 </body>
 <script>
-$(document).ready(function(){
+    $(document).ready(function(){
 		$(".type").each(function(){
 			let type = $(this).text();
 			switch(type){

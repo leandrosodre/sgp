@@ -1,6 +1,7 @@
 package com.sgp.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -10,6 +11,8 @@ public class Team implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long teamId;
+
+    @NotNull
     private String name;
 
     public Team() {
