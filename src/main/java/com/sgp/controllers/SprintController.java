@@ -61,6 +61,28 @@ public class SprintController {
         return mv;
     }
 
+    @PostMapping("/sprint/{sprintId}")
+    public String updateSprint(final Sprint sprint) {
+        sprintRepository.save(sprint);
+        return "redirect:/sprints";
+    }
+
+    @GetMapping("/sprint/closeSprint/{sprintId}")
+    public String closeSprint(@PathVariable final long sprintId) {
+        final Sprint sprint = sprintRepository.findBySprintId(sprintId).orElseThrow(EntityNotFoundException::new);
+        sprint.setOpen(false);
+        sprintRepository.save(sprint);
+        return "redirect:/sprints";
+    }
+
+    @GetMapping("/sprint/reopen/{sprintId}")
+    public String reopenSprint(@PathVariable final long sprintId) {
+        final Sprint sprint = sprintRepository.findBySprintId(sprintId).orElseThrow(EntityNotFoundException::new);
+        sprint.setOpen(true);
+        sprintRepository.save(sprint);
+        return "redirect:/sprints";
+    }
+
     @InitBinder
     public void initBinder(final WebDataBinder binder) {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));

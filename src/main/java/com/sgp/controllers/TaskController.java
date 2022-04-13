@@ -43,7 +43,7 @@ public class TaskController {
         return mv;
     }
 
-    @GetMapping(value = "/createTask")
+    @GetMapping("/createTask")
     public ModelAndView form() {
         final ModelAndView mv = new ModelAndView("tasks/createTask");
         final Iterable<User> users = userRepository.findAll();
@@ -73,7 +73,13 @@ public class TaskController {
         return mv;
     }
 
-    @PostMapping(value = "/createTask")
+    @PostMapping("/task/{taskId}")
+    public String updateTask(final Task task) {
+        taskRepository.save(task);
+        return "redirect:/tasks";
+    }
+
+    @PostMapping("/createTask")
     public String createTask(final Task task) {
         taskRepository.save(task);
         return "redirect:/tasks";

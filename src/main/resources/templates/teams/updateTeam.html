@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/jquery.mask.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/jquery.mask.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <style>
 		td{
 			padding:4px;
@@ -15,8 +15,10 @@
 			padding:10px;
 		}
 
+
+
     </style>
-    <link href="css/masterPage.css" rel="stylesheet" type="text/css">
+    <link href="../css/masterPage.css" rel="stylesheet" type="text/css">
     <title>SGP - Sistema de Gerenciamento de Projetos</title>
 </head>
 
@@ -28,7 +30,7 @@
         <table>
             <tr>
                 <td>Nome do Time:</td>
-                <td><input class="form-control" id="name" name="name" type="text" value=""/></td>
+                <td><input class="form-control" id="name" name="name" th:value="${team.name}" type="text"/></td>
             </tr>
             <tr>
                 <td>

@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/jquery.mask.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/jquery.mask.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <style>
 		td{
 			padding:4px;
@@ -16,35 +16,37 @@
 		}
 
 
+
+
     </style>
-    <link href="css/masterPage.css" rel="stylesheet" type="text/css">
+    <link href="../css/masterPage.css" rel="stylesheet" type="text/css">
     <title>SGP - Sistema de Gerenciamento de Projetos</title>
 </head>
 
 <body>
 <div th:replace="fragments/leftTab :: leftTab"></div>
 <div id="page">
-    <h1>Criar novo usuário</h1>
+    <h1>Atualizar usuário</h1>
     <form class="container" method="post">
         <table>
             <tr>
                 <td>Nome Usuário:</td>
-                <td><input class="form-control" id="name" name="name" type="text" value=""/></td>
+                <td><input class="form-control" id="name" name="name" th:value="${user.name}" type="text"/></td>
             </tr>
 
             <tr>
                 <td>Data de Nascimento:</td>
-                <td><input class="form-control" name="bornDate" type="date" value=""/></td>
+                <td><input class="form-control" name="bornDate" th:field="${user.bornDate}" type="date"/></td>
             </tr>
 
             <tr>
                 <td>Tipo de Usuario</td>
                 <td>
                     <select class="form-control" name="type">
-                        <option th:value=0>Administrador</option>
-                        <option th:value=1>Project Manager</option>
-                        <option th:value=2>Scrum Master</option>
-                        <option th:value=3>Developer</option>
+                        <option th:selected="${user.type}==0" th:value=0>Administrador</option>
+                        <option th:selected="${user.type}==1" th:value=1>Project Manager</option>
+                        <option th:selected="${user.type}==2" th:value=2>Scrum Master</option>
+                        <option th:selected="${user.type}==3" th:value=3>Developer</option>
                     </select>
                 </td>
             </tr>
@@ -53,6 +55,7 @@
                 <td><select class="form-control" name="team.teamId">
                     <option th:text="SELECIONE" value="0"></option>
                     <option th:each="team : ${teams}"
+                            th:selected="(${team.teamId} == *{user.team.teamId})"
                             th:text="${team.name}"
                             th:value="${team.teamId}"/>
                 </select></td>
@@ -60,12 +63,13 @@
 
             <tr>
                 <td>Login:</td>
-                <td><input class="form-control" name="login" type="text" value=""/></td>
+                <td><input class="form-control" name="login" th:value="${user.login}" type="text"/></td>
             </tr>
 
             <tr>
                 <td>Senha:</td>
-                <td><input class="form-control" maxlength="15" name="password" type="password" value=""/></td>
+                <td><input class="form-control" maxlength="15" name="password" th:value="${user.password}"
+                           type="password"/></td>
             </tr>
             <tr>
                 <td>

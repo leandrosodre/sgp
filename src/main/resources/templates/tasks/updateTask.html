@@ -47,11 +47,11 @@
                 <td>Prioridade:</td>
                 <td>
                     <select class="form-control" name="priority">
-                        <option th:value="0">Muito Alta</option>
-                        <option th:value="1">Alta</option>
-                        <option th:value="2">Media</option>
-                        <option th:value="3">Baixa</option>
-                        <option th:value="4">Baixissima</option>
+                        <option th:value="0" th:selected="${task.priority}==0">Muito Alta</option>
+                        <option th:value="1" th:selected="${task.priority}==1">Alta</option>
+                        <option th:value="2" th:selected="${task.priority}==2">Media</option>
+                        <option th:value="3" th:selected="${task.priority}==3">Baixa</option>
+                        <option th:value="4" th:selected="${task.priority}==4">Baixissima</option>
                     </select>
                 </td>
             </tr>

@@ -9,12 +9,10 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.EntityNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -49,6 +47,23 @@ public class UserController {
     @PostMapping(value = "/createUser")
     public String createUser(final User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        userRepository.save(user);
+        return "redirect:/users";
+    }
+
+    @GetMapping("/user/{userId}")
+    public ModelAndView editUser(@PathVariable final long userId) {
+        final ModelAndView mv = new ModelAndView("users/updateUser");
+        final Iterable<Team> teams = teamRepository.findAll();
+        final User user = userRepository.findByUserId(userId).orElseThrow(EntityNotFoundException::new);
+        
+        mv.addObject("user", user);
+        mv.addObject("teams", teams);
+        return mv;
+    }
+
+    @PostMapping("/user/{userId}")
+    public String updateUser(final User user) {
         userRepository.save(user);
         return "redirect:/users";
     }
