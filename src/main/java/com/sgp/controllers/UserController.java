@@ -1,5 +1,6 @@
 package com.sgp.controllers;
 
+import com.sgp.models.Role;
 import com.sgp.models.Team;
 import com.sgp.models.User;
 import com.sgp.repositories.TeamRepository;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.persistence.EntityNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -47,6 +49,7 @@ public class UserController {
     @PostMapping(value = "/createUser")
     public String createUser(final User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setRoles(getUserRole(user.getType()));
         userRepository.save(user);
         return "redirect:/users";
     }
@@ -56,7 +59,7 @@ public class UserController {
         final ModelAndView mv = new ModelAndView("users/updateUser");
         final Iterable<Team> teams = teamRepository.findAll();
         final User user = userRepository.findByUserId(userId).orElseThrow(EntityNotFoundException::new);
-        
+
         mv.addObject("user", user);
         mv.addObject("teams", teams);
         return mv;
@@ -64,8 +67,20 @@ public class UserController {
 
     @PostMapping("/user/{userId}")
     public String updateUser(final User user) {
+        user.setRoles(getUserRole(user.getType()));
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
         return "redirect:/users";
+    }
+
+    private List<Role> getUserRole(final int type) {
+
+        return switch (type) {
+            case 0 -> List.of(new Role("ROLE_ADMIN"));
+            case 1 -> List.of(new Role("ROLE_PM"));
+            case 2 -> List.of(new Role("ROLE_SM"));
+            default -> List.of(new Role("ROLE_DEV"));
+        };
     }
 
     @InitBinder
